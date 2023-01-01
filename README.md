@@ -1,4 +1,4 @@
-![](https://i.ibb.co/WWQWWKL/Screenshot-2023-01-01-at-18-03-05.png)
+<img src="[drawing.jpg](https://i.ibb.co/WWQWWKL/Screenshot-2023-01-01-at-18-03-05.png)" alt="preview" width="450"/>
 
 # Start Backend
 `cd backend`
