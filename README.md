@@ -1,4 +1,4 @@
-![](https://ibb.co/7JHJJyq)
+![](https://i.ibb.co/WWQWWKL/Screenshot-2023-01-01-at-18-03-05.png)
 
 # Start Backend
 `cd backend`
