@@ -1,23 +1,23 @@
 <template>
   <q-layout view="lHh Lpr lFf" class="main-layout">
-    <q-header elevated dark>
-      <q-toolbar>
-        <q-btn
+    <q-header elevated>
+      <!-- <q-toolbar> -->
+      <!-- <q-btn
           flat
           dense
           round
           icon="menu"
           aria-label="Menu"
           @click="toggleLeftDrawer"
-        />
+        /> -->
 
-        <q-toolbar-title> ChatGPT Interface </q-toolbar-title>
+      <!-- <q-toolbar-title> ChatGPT Interface </q-toolbar-title> -->
 
-        <!-- <div>Quasar v{{ $q.version }}</div> -->
-      </q-toolbar>
+      <!-- <div>Quasar v{{ $q.version }}</div> -->
+      <!-- </q-toolbar> -->
     </q-header>
 
-    <q-drawer v-model="leftDrawerOpen" show-if-above bordered>
+    <q-drawer v-model="leftDrawerOpen" bordered>
       <q-list>
         <q-item-label header> Essential Links </q-item-label>
 
