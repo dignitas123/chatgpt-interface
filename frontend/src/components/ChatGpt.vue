@@ -1,7 +1,14 @@
 <template>
   <q-card class="my-card q-ma-md">
     <q-card-section class="text-right">
-      <q-btn round color="secondary" outline size="sm" :icon="speechOn ? 'volume_up' : 'volume_off'" @click="toggleSpeech"/>
+      <q-btn
+        round
+        color="secondary"
+        outline
+        size="sm"
+        :icon="speechOn ? 'volume_up' : 'volume_off'"
+        @click="toggleSpeech"
+      />
     </q-card-section>
     <q-card-section>
       <div class="q-pa-md">
@@ -68,7 +75,7 @@ async function fetchAnswer() {
     const data = await res.json();
     console.log(data);
     const answer = data.bot.trim();
-    if(speechOn.value) {
+    if (speechOn.value) {
       speech(answer);
     }
     answers.value.unshift(answer);
@@ -81,22 +88,47 @@ async function fetchAnswer() {
     question.value = '';
   }
 }
+const synthesis = window.speechSynthesis;
+const utterance = new SpeechSynthesisUtterance();
+
+let synthTimeout: NodeJS.Timeout;
+function timer() {
+  synthesis.pause();
+  synthesis.resume();
+  synthTimeout = setTimeout(timer, 14000);
+}
 
 function speech(text: string) {
+  synthesis.cancel();
+
   const language = lngDetector.detect(text, 1).length
     ? lngDetector.detect(text, 1)[0][0]
     : 'en';
-  const speech = new SpeechSynthesisUtterance();
-  speech.text = text;
-  speech.lang = language;
-  speech.rate = 0.9;
-  window.speechSynthesis.speak(speech);
+  if (language === 'en') {
+    const voices = synthesis.getVoices();
+    utterance.voice = voices[145];
+  }
+  utterance.text = text;
+  utterance.lang = language;
+  utterance.rate = 0.9;
+  utterance.onend = () => {
+    clearTimeout(synthTimeout);
+  };
+
+  synthTimeout = setTimeout(timer, 14000);
+
+  synthesis.speak(utterance);
 }
 
 const speechOn = ref(true);
 
 function toggleSpeech() {
-  speechOn.value = !speechOn.value
+  speechOn.value = !speechOn.value;
+  if (!speechOn.value) {
+    synthesis.pause();
+  } else {
+    synthesis.resume();
+  }
 }
 </script>
 
