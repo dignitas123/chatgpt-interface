@@ -73,7 +73,6 @@ async function fetchAnswer() {
       }),
     });
     const data = await res.json();
-    console.log(data);
     const answer = data.bot.trim();
     if (speechOn.value) {
       speech(answer);
